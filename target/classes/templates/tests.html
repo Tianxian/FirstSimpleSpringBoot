@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+ <head lang="en">
+  <meta charset="UTF-8"></meta>
+  <title>测试列表</title>
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+  <link rel="stylesheet" href="/css/footer.css"></link>
+</head>
+ <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://www.tianmaying.com/tutorial/music-163-crawler">测试列表(共<span th:text="${tests.totalElements}"></span>个测试)</a>
+    </div>
+  </div>
+</nav>
+
+ <div class="container" style="margin-top:50px">
+   <div class="row">
+     <div class="col-sm-8">
+      <div class="blog-post">
+        <span class="col-sm-8"></span>
+      </div>
+      <h3>测试系统（By anna）</h3>
+        
+      
+      <table class="table"> 
+        <thead>
+            <tr>
+                <th>用例描述</th>
+                <th>用例数</th>
+				<th>通过百分比</th>
+                <th>是否已爬</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="test: ${tests.content}">
+                <td th:text="${test.exDesc}"></td>
+				<td th:text="${test.tcCount}"></td>
+				<td th:text="${test.passPer}"></td>
+                <td th:text="${test.crawlStatus}"></td>
+            </tr>
+        </tbody>
+      </table>
+      
+      <hr></hr>
+       <nav>
+        <ul class="pager">
+          <li th:unless="${tests.first}" class="previous"><a th:href="@{'/tests' + '?page=' + ${tests.number - 1}}">上一页<span aria-hidden="true">&larr;</span></a></li>
+          <li th:unless="${tests.last}" class="next"><a th:href="@{'/tests' + '?page=' + ${tests.number + 1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
+     </div>
+    </div>
+   </div>
+   <footer>
+    &copy; 2017 Anna, Inc. &middot; <a href="#">隐私</a> &middot; <a href="#">条款</a>
+  </footer>
+ </body>
+</html>
